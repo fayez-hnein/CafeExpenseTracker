@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "885130654636",
+    "project_id": "cafe-expenses",
+    "storage_bucket": "cafe-expenses.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885130654636:android:9f6fcc3e3b32a9bb294009",
+        "android_client_info": {
+          "package_name": "com.example.cafe_expense_tracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8ttvzUxG_G4XxWqCqPoohETIyinqkakM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

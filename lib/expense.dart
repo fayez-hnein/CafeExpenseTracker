@@ -1,4 +1,10 @@
-enum ExpenseCategory { Ingredients, Wages, Maintenance, RentUtilities, Other }
+enum ExpenseCategory {
+  Ingredients,
+  Wages,
+  Maintenance,
+  RentUtilities,
+  Other,
+}
 
 extension ExpenseCategoryExt on ExpenseCategory {
   String get name {

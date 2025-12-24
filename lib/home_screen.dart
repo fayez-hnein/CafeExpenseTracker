@@ -4,43 +4,57 @@ import 'add_expense_screen.dart';
 import 'expense_provider.dart';
 import 'expense_tile.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ExpenseProvider>(context);
-    final expenses = provider.items;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Café Expense Tracker'),
+        title: const Text('Cafe Expenses'),
       ),
-      body: expenses.isEmpty
-          ? const Center(child: Text('No expenses yet. Tap + to add one.'))
-          : ListView.builder(
-        itemCount: expenses.length,
-        itemBuilder: (context, i) {
-          final e = expenses[i];
-          return ExpenseTile(expense: e);
-        },
+      body: Column(
+        children: [
+          Card(
+            margin: const EdgeInsets.all(16),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                'Total Expenses: \$${provider.totalExpenses.toStringAsFixed(2)}',
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          Expanded(
+            child: provider.expenses.isEmpty
+                ? const Center(child: Text('No expenses yet'))
+                : ListView.builder(
+              itemCount: provider.expenses.length,
+              itemBuilder: (context, index) {
+                return ExpenseTile(
+                  expense: provider.expenses[index],
+                );
+              },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final expense = await Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const AddExpenseScreen()),
+            MaterialPageRoute(
+              builder: (_) => const AddExpensePage(),
+            ),
           );
+
+          if (expense != null) {
+            provider.addExpense(expense);
+          }
         },
         child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Text(
-          'Total: \$${provider.total.toStringAsFixed(2)}',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
       ),
     );
   }
